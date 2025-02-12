@@ -39,7 +39,7 @@
     </style>
 </head>
 <body>
-    <audio id="background-audio" autoplay loop>
+    <audio id="background-audio" autoplay loop muted playsinline>
         <source src="The Substance.mp3" type="audio/mpeg">
         Seu navegador não suporta a reprodução de áudio.
     </audio>
@@ -61,12 +61,19 @@
         }
 
         // Forçar o áudio a tocar em alguns navegadores bloqueadores
-        document.addEventListener('click', () => {
+        function playAudio() {
             const audio = document.getElementById('background-audio');
+            if (audio.muted) {
+                audio.muted = false; // Ativar áudio após interação do usuário
+            }
             if (audio.paused) {
                 audio.play().catch(error => console.error('Erro ao reproduzir áudio:', error));
             }
-        });
+        }
+
+        document.addEventListener('DOMContentLoaded', playAudio);
+        document.addEventListener('click', playAudio);
+        document.addEventListener('touchstart', playAudio);
     </script>
 </body>
 </html>
