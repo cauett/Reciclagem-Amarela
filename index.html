@@ -39,6 +39,11 @@
     </style>
 </head>
 <body>
+    <audio id="background-audio" autoplay loop>
+        <source src="The Substance.mp3" type="audio/mpeg">
+        Seu navegador não suporta a reprodução de áudio.
+    </audio>
+
     <div id="carousel" onclick="nextImage()">
         <img src="1.png" class="carousel-image active">
         <img src="2.png" class="carousel-image">
@@ -54,6 +59,14 @@
             currentIndex = (currentIndex + 1) % images.length;
             images[currentIndex].classList.add('active');
         }
+
+        // Forçar o áudio a tocar em alguns navegadores bloqueadores
+        document.addEventListener('click', () => {
+            const audio = document.getElementById('background-audio');
+            if (audio.paused) {
+                audio.play().catch(error => console.error('Erro ao reproduzir áudio:', error));
+            }
+        });
     </script>
 </body>
 </html>
