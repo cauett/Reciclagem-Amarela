@@ -73,6 +73,11 @@
         <img src="3.png" class="carousel-image">
         <img src="4.png" class="carousel-image">
         <img src="5.png" class="carousel-image">
+        <img src="6.png" class="carousel-image">
+        <img src="7.png" class="carousel-image">
+        <img src="8.png" class="carousel-image">
+        <img src="9.png" class="carousel-image">
+        <img src="10.png" class="carousel-image">
     </div>
 
     <script>
@@ -84,9 +89,11 @@
         const audio = document.getElementById('background-audio');
 
         function nextImage() {
-            images[currentIndex].classList.remove('active'); // Remove a classe ativa
-            currentIndex = (currentIndex + 1) % images.length; // Avança para a próxima imagem
-            images[currentIndex].classList.add('active'); // Ativa a nova imagem
+            if (currentIndex < images.length - 1) { // Verifica se não está na última imagem
+                images[currentIndex].classList.remove('active'); // Remove a classe ativa
+                currentIndex++; // Avança para a próxima imagem
+                images[currentIndex].classList.add('active'); // Ativa a nova imagem
+            }
         }
 
         // Esconder o vídeo e mostrar a primeira imagem do carrossel no clique
@@ -102,7 +109,7 @@
             }
         });
 
-        // Permitir avançar as imagens com clique no carrossel
+        // Permitir avançar as imagens com clique no carrossel, mas para na última
         carousel.addEventListener('click', nextImage);
     </script>
 </body>
